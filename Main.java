@@ -11,7 +11,6 @@ public class Main {
     private static JLabel title;
     private static Sudoku sudoku;
     private static JLabel[][] grid;
-    private static Canvas canvas;
     private static JButton generate;
     private static GenerateListener generateAL;
 
@@ -24,18 +23,17 @@ public class Main {
         content = window.getContentPane();
         window.setLocation(350, 350);
         content.setLayout(null);
+
+        //Create Sudoku
         sudoku = new Sudoku();
+
+        //Generate Button
         generate = new JButton("GENERATE");
         generate.setFont(new Font("TimesRoman", Font.PLAIN, 24));
         generateAL = new GenerateListener();
         generate.addActionListener(generateAL);
         generate.setBounds(25, 350, 300, 50);
         content.add(generate);
-        canvas = new Canvas();
-        canvas.setBounds(0, 0, 350, 450);
-        canvas.setBackground(Color.white);
-
-        //content.add(canvas);
 
         grid = new JLabel[3][3];
         for (int o = 0; o < grid.length; o++) {
@@ -43,7 +41,6 @@ public class Main {
                 grid[o][i] = new JLabel(" ");
             }
         }
-
         draw();
     }
 
@@ -69,33 +66,6 @@ public class Main {
                 content.add(grid[i][o]);
             }
         }
-
-        /*
-        PrintWriter writer = new PrintWriter("D:/Users/julia/Downloads/sudoku.html", "UTF-8");
-        writer.println("<html>");
-        writer.println("<style>");
-        writer.println("table, th, td {");
-        writer.println("  border: 1px solid black;");
-        writer.println("  border-collapse: collapse;");
-        writer.println("  padding: 16px;");
-        writer.println("}");
-        writer.println("</style>");
-        writer.println("<table>");
-        for (int y = 0; y < 9; y++) {
-            writer.println("<tr>");
-            for (int x = 0; x < 9; x++) {
-                int cell = sudoku.cells[x][y];
-                if(cell!=0)
-                    writer.println("<td>"+cell + "</td>");
-                else
-                    writer.println("<td> </td>");
-            }
-            writer.println("</tr>");
-        }
-        writer.println("</table>");
-        writer.println("</html>");
-        writer.close();
-        */
 
         System.out.println("Result:");
         String text = "";
