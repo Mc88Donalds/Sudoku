@@ -14,6 +14,14 @@ public class Main {
     private static JButton generate;
     private static GenerateListener generateAL;
 
+    public static void main1(String[] args) {
+        for (int i = 0; i < 9; i++) {
+            System.out.println("i:" + i);
+            System.out.println("/3:" + i / 3);
+            System.out.println("int:" + i / 3);
+        }
+    }
+
     public static void main(String[] args) {
 
         //Create GUI
