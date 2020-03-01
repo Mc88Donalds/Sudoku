@@ -32,15 +32,17 @@ public class Sudoku {
         for (int row = 0; ; row++) {
             int col = 0;
             //skip all done cells
-            while (col < grid[0].length && grid[row][col] != 0)
+            while (col < 9 && grid[row][col] != 0)
                 col++;
-            if (col >= grid[0].length)
+            if (col >= 9)
                 continue;
 
             //iterate over all values
-            for (int value = 1; value <= grid.length; value++) {
-                //check if this value has been used in this row
+            for (int value = 1; value <= 9; value++) {
+
                 boolean used = false;
+
+                //check if this value has been used in this row
                 for (int i = 0; i < grid.length; i++) {
                     if (grid[row][i] == value) {
                         used = true;
@@ -49,6 +51,7 @@ public class Sudoku {
                 }
                 if (used)
                     continue;
+
                 //check if this value has been used in this column
                 for (int i = 0; i < grid.length; i++) {
                     if (grid[i][col] == value) {
@@ -58,10 +61,12 @@ public class Sudoku {
                 }
                 if (used)
                     continue;
-                //check the 3x3 your in
+
+                //find the 3x3
                 int x = (col / 3) * 3;
                 int y = (row / 3) * 3;
 
+                //check 3x3
                 for (int i = 0; i < 3; i++) {
                     for (int o = 0; o < 3; o++) {
                         if (grid[i + y][o + x] == value) {
@@ -72,8 +77,10 @@ public class Sudoku {
                 }
                 if (used)
                     continue;
+
                 //set the value
                 grid[row][col] = value;
+
                 if (done(grid)) {
                     //Solution found
                     solutions += 1;
@@ -191,8 +198,8 @@ public class Sudoku {
             cells[x][y] = value;
 
             //check whole grid
-            for (x = 0; x < cells.length; x++) {
-                for (y = 0; y < cells[0].length; y++) {
+            for (x = 0; x < 9; x++) {
+                for (y = 0; y < 9; y++) {
                     while (y < 9 && cells[x][y] == 0) {
                         y++;
                     }
@@ -213,7 +220,6 @@ public class Sudoku {
                         cells[x][y] = value;
                     }
                 }
-                x++;
             }
             return;
         }

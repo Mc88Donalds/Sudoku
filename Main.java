@@ -8,19 +8,10 @@ import java.awt.event.ActionListener;
 public class Main {
     private static JFrame window;
     private static Container content;
-    private static JLabel title;
     private static Sudoku sudoku;
     private static JLabel[][] grid;
     private static JButton generate;
     private static GenerateListener generateAL;
-
-    public static void main1(String[] args) {
-        for (int i = 0; i < 9; i++) {
-            System.out.println("i:" + i);
-            System.out.println("/3:" + i / 3);
-            System.out.println("int:" + i / 3);
-        }
-    }
 
     public static void main(String[] args) {
 
@@ -31,6 +22,15 @@ public class Main {
         content = window.getContentPane();
         window.setLocation(350, 350);
         content.setLayout(null);
+
+        /*
+        int values[] = new int[100000];
+        for(int i=0;i<100000;i++){
+            sudoku = new Sudoku();
+            values[i]=sudoku.minValues;
+        }
+        System.out.println("Minimum in 100.000 tries:"+ Arrays.stream(values).min().getAsInt());
+        */
 
         //Create Sudoku
         sudoku = new Sudoku();
@@ -50,6 +50,10 @@ public class Main {
             }
         }
         draw();
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc();
+        System.out.println("Used Memory: " + (runtime.totalMemory() - runtime.freeMemory()) + "Bytes");
+        System.out.println("Used Memory: " + (runtime.totalMemory() - runtime.freeMemory()) / (1024L * 1024L) + "MB");
     }
 
     private static void draw() {
@@ -95,6 +99,10 @@ public class Main {
         public void actionPerformed(ActionEvent e) {
             sudoku = new Sudoku();
             draw();
+            Runtime runtime = Runtime.getRuntime();
+            runtime.gc();
+            System.out.println("Used Memory: " + (runtime.totalMemory() - runtime.freeMemory()) + "Bytes");
+            System.out.println("Used Memory: " + (runtime.totalMemory() - runtime.freeMemory()) / (1024L * 1024L) + "MB");
         }
     }
 }
